@@ -34,6 +34,7 @@ const MainApp = () => {
 
 const myServer = HTTP.createServer((Req, Res) => {
   Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
+  Res.write('Automatic-Node-Mailer Backend Server');
   Res.end();
 }).listen(PORT, () => {
   console.log(`Server Working On ${PORT}`);
