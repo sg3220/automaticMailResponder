@@ -16,7 +16,7 @@ Hello, Welcome To The Documentation Of My Automatic-Mail-Responder.
 > <BR>
 > Parameters: `{` <BR>
 
-    userId:'me', <BR>
+    userId:'me',
 
 > `}`
 
@@ -37,7 +37,7 @@ It Used To Create A New Label.
         color: {
           backgroundColor: '#83334c',
           textColor: '#ffffff',
-        } <BR>
+        }
 
 > `}`
 
@@ -49,7 +49,7 @@ It Is Used To List All The Messages In The User's Mailbox.
 > <BR>
 > Parameters: `{` <BR>
 
-    userId:'me', <BR>
+    userId:'me',
 
 
 > `}`
@@ -63,7 +63,7 @@ It Is Used To Get A Specific Message From The User's Mailbox.
 > Parameters: `{` <BR>
 
     userId:'me', 
-    id: '18c79c312283047c' <BR>
+    id: '18c79c312283047c'
 
 
 > `}`
@@ -77,7 +77,7 @@ It Is Used To Modify The Labels Of A Specific Message In The User's Mailbox.
 > Parameters: `{` <BR>
 
     userId:'me', 
-    id: '18c79c312283047c' <BR>
+    id: '18c79c312283047c'
 
 
 > `}`
