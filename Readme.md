@@ -18,15 +18,15 @@ It Used To Create A New Label
 
 > Parameters: `{` <BR>
 
-    `userId:'me',` <BR>
-    `resource: {` <BR>
-        `name: 'nameOfLabel',` <BR>
-        `labelListVisibility: 'labelShow',` <BR>
-        `messageListVisibility: 'show',` <BR>
-        `type: 'user',` <BR>
-        `color: {` <BR>
-          `backgroundColor: '#83334c',` <BR>
-          `textColor: '#ffffff',` <BR>
-        `},` <BR>
+    userId:'me', 
+    resource: {
+        name: 'nameOfLabel',
+        labelListVisibility: 'labelShow',
+        messageListVisibility: 'show',
+        type: 'user',
+        color: {
+          backgroundColor: '#83334c',
+          textColor: '#ffffff',
+        } <BR>
 
-`}` <BR>
+}
