@@ -29,4 +29,25 @@ It Used To Create A New Label
           textColor: '#ffffff',
         } <BR>
 
-}
+> `}`
+<BR>
+> **POST:** `users.labels.create`
+> <BR>
+It Used To Create A New Label
+
+<BR>
+
+> Parameters: `{` <BR>
+
+    userId:'me', 
+    resource: {
+        name: 'nameOfLabel',
+        labelListVisibility: 'labelShow',
+        messageListVisibility: 'show',
+        type: 'user',
+        color: {
+          backgroundColor: '#83334c',
+          textColor: '#ffffff',
+        } <BR>
+
+> `}`
