@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-const { extractMessageID } = require('./myMethods.JS');
+const { extractMessageID } = require('./myMethods.js');
 
 require('dotenv').config();
 
