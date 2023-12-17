@@ -6,14 +6,14 @@ Hello, Welcome To The Documentation Of My Automatic-Mail-Responder.
 
 - **Language/Runtime Used:** Javascript, NodeJS
 - **Hosted On:** Render
-- **Packages Used**: googleapis(v129.0.0), nodemailer(v6.9.7) 
+- **Packages Used**: googleapis(v129.0.0), nodemailer(v6.9.7)
+- **⭐ Try-Yourself**: Send An Email At **s8418g@gmail.com** & Get Automatic Reply
 - [Click To Visit Backend Server](https://automatic-mail-responder.onrender.com)
 
 ## GMAIL-API-Methods Used:
 
-> **GET:** `users.labels.list`
-> <BR>
-  It Is Used To List All Labels In A User's Mailbox.
+> **GET:** `users.labels.list` > <BR>
+> It Is Used To List All Labels In A User's Mailbox.
 > <BR>
 > Parameters: `{` <BR>
 
@@ -23,13 +23,12 @@ Hello, Welcome To The Documentation Of My Automatic-Mail-Responder.
 
 <BR>
 
-> **POST:** `users.labels.create`
-> <BR>
-It Used To Create A New Label.
+> **POST:** `users.labels.create` > <BR>
+> It Used To Create A New Label.
 > <BR>
 > Parameters: `{` <BR>
 
-    userId:'me', 
+    userId:'me',
     resource: {
         name: 'nameOfLabel',
         labelListVisibility: 'labelShow',
@@ -44,41 +43,35 @@ It Used To Create A New Label.
 
 <BR>
 
-> **GET:** `users.messages.list`
-> <BR>
-It Is Used To List All The Messages In The User's Mailbox.
+> **GET:** `users.messages.list` > <BR>
+> It Is Used To List All The Messages In The User's Mailbox.
 > <BR>
 > Parameters: `{` <BR>
 
     userId:'me',
 
+> `}`
+
+<BR>
+
+> **GET:** `users.messages.get` > <BR>
+> It Is Used To Get A Specific Message From The User's Mailbox.
+> <BR>
+> Parameters: `{` <BR>
+
+    userId:'me',
+    id: '18c79c312283047c'
 
 > `}`
 
 <BR>
 
-> **GET:** `users.messages.get`
-> <BR>
-It Is Used To Get A Specific Message From The User's Mailbox.
-> <BR>
-> Parameters: `{` <BR>
-
-    userId:'me', 
-    id: '18c79c312283047c'
-
-
-> `}`
-
-<BR>
-
-> **POST:** `users.messages.modify`
-> <BR>
-It Is Used To Modify The Labels Of A Specific Message In The User's Mailbox.
+> **POST:** `users.messages.modify` > <BR>
+> It Is Used To Modify The Labels Of A Specific Message In The User's Mailbox.
 > <BR>
 > Parameters: `{` <BR>
 
-    userId:'me', 
+    userId:'me',
     id: '18c79c312283047c'
-
 
 > `}`

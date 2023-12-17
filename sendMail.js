@@ -27,7 +27,7 @@ const SendMail = async (recipient, oAuth2Client) => {
         to: `${recipient}`,
         subject: 'Automatic-Mail-Responder',
         text: 'A NodeJS Application To Reply To Unreplied Emails, Add Labels Automatically',
-        // html: '<h1><h1>',
+        html: '<h1>A NodeJS Application To Reply To Unreplied Emails, Add Labels Automatically<h1>',
       };
       const finalResult = await transport.sendMail(mailOptions);
       Res('Success');
