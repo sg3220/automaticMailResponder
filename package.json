@@ -2,10 +2,10 @@
   "name": "siddharth-gmail-api",
   "version": "1.0.0",
   "description": "A NodeJS Application To Reply To Unreplied Emails, Add Labels Automatically",
-  "main": "Server.JS",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "Start": "Nodemon Server.JS"
+    "start": "node server.JS"
   },
   "author": "Siddharth Ghosh",
   "license": "ISC",
@@ -13,5 +13,8 @@
     "dotenv": "^16.3.1",
     "googleapis": "^129.0.0",
     "nodemailer": "^6.9.7"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }

@@ -1,4 +1,4 @@
-const { SendMail } = require('./SendMail.JS');
+const { SendMail } = require('./sendMail.js');
 
 const createLabel = async (gmailInstance, nameOfLabel) => {
   return new Promise(async (Res, Rej) => {
