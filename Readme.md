@@ -16,7 +16,7 @@ It Used To Create A New Label
 
 <BR>
 
-> Parameters: <BR> >`{` <BR>
+> Parameters: `{` <BR>
 
     `userId:'me',` <BR>
     `resource: {` <BR>
