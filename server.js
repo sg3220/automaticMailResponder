@@ -10,26 +10,27 @@ const PORT = process.env.PORT_NUMBER;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
-// extractMessageID(gmailInstance, oAuth2Client);
+const runTask = (gmailInstance, oAuth2Client) => {
+  extractMessageID(gmailInstance, oAuth2Client);
+};
 
-// const oAuth2Client = new google.auth.OAuth2(
-//   CLIENT_ID,
-//   CLIENT_SECRET,
-//   REDIRECT_URI
-// );
-
-// oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-
-// const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
-
-// console.log('#0:');
-// runTask();
-
-// setInterval(() => {
-//   runTask();
-// }, 90 * 1000);
 const MainApp = () => {
-  console.log('MainApp');
+  const oAuth2Client = new google.auth.OAuth2(
+    CLIENT_ID,
+    CLIENT_SECRET,
+    REDIRECT_URI
+  );
+
+  oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+  const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
+
+  console.log('#0:');
+  runTask(gmailInstance, oAuth2Client);
+
+  setInterval(() => {
+    runTask(gmailInstance, oAuth2Client);
+  }, 105 * 1000);
 };
 
 const myServer = HTTP.createServer((Req, Res) => {
