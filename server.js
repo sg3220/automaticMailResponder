@@ -15,6 +15,13 @@ const runTask = (gmailInstance, oAuth2Client) => {
   extractMessageID(gmailInstance, oAuth2Client);
 };
 
+const randomInterval = () => {
+  const randomDecimal = Math.random();
+  const randomInterval = 45 + randomDecimal * 75;
+  console.log(`Next Check For UNREAD Mails In... ${randomInterval}s`);
+  return randomInterval * 1000;
+};
+
 const mainApp = () => {
   const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
@@ -25,13 +32,12 @@ const mainApp = () => {
   oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
   const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
-
-  console.log(`Checking For New Mails...`);
+  console.log(`intialCheck: `);
   runTask(gmailInstance, oAuth2Client);
 
   setInterval(() => {
     runTask(gmailInstance, oAuth2Client);
-  }, 105 * 1000);
+  }, randomInterval());
 };
 
 const myServer = HTTP.createServer((Req, Res) => {
