@@ -10,36 +10,32 @@ const PORT = process.env.PORT_NUMBER;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
-const oAuth2Client = new google.auth.OAuth2(
-  CLIENT_ID,
-  CLIENT_SECRET,
-  REDIRECT_URI
-);
+// extractMessageID(gmailInstance, oAuth2Client);
 
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+// const oAuth2Client = new google.auth.OAuth2(
+//   CLIENT_ID,
+//   CLIENT_SECRET,
+//   REDIRECT_URI
+// );
 
-const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
+// oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-const runTask = () => {
-  extractMessageID(gmailInstance, oAuth2Client);
-};
-let myServer;
-const ServerCreation = () => {
-  myServer = HTTP.createServer((Req, Res) => {
-    Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
-    Res.end();
+// const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
 
-    myServer.listen(PORT, () => {
-      console.log(`Server Working On ${PORT}`);
-    });
-  });
+// console.log('#0:');
+// runTask();
+
+// setInterval(() => {
+//   runTask();
+// }, 90 * 1000);
+const MainApp = () => {
+  console.log('MainApp');
 };
 
-console.log('#0:');
-runTask();
-
-setInterval(() => {
-  runTask();
-}, 90 * 1000);
-
-ServerCreation();
+const myServer = HTTP.createServer((Req, Res) => {
+  Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
+  Res.end();
+}).listen(PORT, () => {
+  console.log(`Server Working On ${PORT}`);
+  MainApp();
+});
