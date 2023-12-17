@@ -11,10 +11,11 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const runTask = (gmailInstance, oAuth2Client) => {
+  console.log(`Checking For New Mails...`);
   extractMessageID(gmailInstance, oAuth2Client);
 };
 
-const MainApp = () => {
+const mainApp = () => {
   const oAuth2Client = new google.auth.OAuth2(
     CLIENT_ID,
     CLIENT_SECRET,
@@ -25,7 +26,7 @@ const MainApp = () => {
 
   const gmailInstance = google.gmail({ version: 'v1', auth: oAuth2Client });
 
-  console.log('#0:');
+  console.log(`Checking For New Mails...`);
   runTask(gmailInstance, oAuth2Client);
 
   setInterval(() => {
@@ -35,9 +36,9 @@ const MainApp = () => {
 
 const myServer = HTTP.createServer((Req, Res) => {
   Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
-  Res.write('Automatic-Node-Mailer Backend Server');
+  Res.write('Automatic-Node-Mailer Server');
   Res.end();
 }).listen(PORT, () => {
   console.log(`Server Working On ${PORT}`);
-  MainApp();
+  mainApp();
 });
