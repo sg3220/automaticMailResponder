@@ -28,12 +28,12 @@ const ServerCreation = () => {
   myServer = HTTP.createServer((Req, Res) => {
     Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
     Res.end();
+
+    myServer.listen(PORT, () => {
+      console.log(`Server Working On ${PORT}`);
+    });
   });
 };
-
-myServer.listen(PORT, () => {
-  console.log(`Server Working On ${PORT}`);
-});
 
 console.log('#0:');
 runTask();
