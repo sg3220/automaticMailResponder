@@ -6,7 +6,7 @@ Hello, Welcome To The Documentation Of My Automatic-Mail-Responder.
 
 - **Language/Runtime Used:** Javascript, NodeJS
 - **Hosted On:** Render
-- **Packages Used**: googleapis, nodemailer 
+- **Packages Used**: googleapis(v129.0.0), nodemailer(v6.9.7) 
 - [Click To Visit Backend Server](https://automatic-mail-responder.onrender.com)
 
 ## GMAIL-API-Methods Used:
