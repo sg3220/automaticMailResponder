@@ -28,8 +28,8 @@ const SendMail = async (recipient, oAuth2Client) => {
         from: 'Reply From 🤖 <s8418g@gmail.com>',
         to: `${recipient}`,
         subject: 'Automatic-Mail-Responder',
-        text: 'A NodeJS Application To Reply To Unreplied Emails, Add Labels Automatically',
-        html: '<h1>A NodeJS Application To Reply To Unreplied Emails, Add Labels Automatically<h1>',
+        text: `👋, Thanks For Mailing I'm Currently Little Busy With My Assignment...I Will Revert Back As Soon As I Get Free`,
+        html: `<h1>👋, Thanks For Mailing I'm Currently Little Busy With My Assignment...I Will Revert Back As Soon As I Get Free<h1>`,
       };
       //--> Sending Mail
       const finalResult = await transport.sendMail(mailOptions);

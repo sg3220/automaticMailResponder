@@ -51,7 +51,7 @@ const mainApp = () => {
 
 //--> Creating HTTP Server
 const myServer = HTTP.createServer((Req, Res) => {
-  Res.writeHead(200, 'OK', { cookieToken: 'NULL' });
+  Res.writeHead(200, 'OK', { cookieToken: 'internship' });
   Res.write('Automatic-Node-Mailer Server');
   Res.end();
 }).listen(PORT, () => {
