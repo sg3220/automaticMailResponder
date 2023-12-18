@@ -1,10 +1,11 @@
 const { SendMail } = require('./sendMail.js');
 
-const createLabel = async (gmailInstance, nameOfLabel) => {
+//--> Creating A New Label
+const createLabel = async (gmailInstance) => {
   return new Promise(async (Res, Rej) => {
     try {
       const newLabelConfiguration = {
-        name: nameOfLabel,
+        name: 'PUSH',
         labelListVisibility: 'labelShow',
         messageListVisibility: 'show',
         type: 'user',
@@ -20,34 +21,28 @@ const createLabel = async (gmailInstance, nameOfLabel) => {
       });
 
       const stringLabelID = objectResult.data.id;
-      console.log(`Created New Label With ID: ${stringLabelID}`);
+
+      console.log(`messageFromServer: Label Creation✅, ID: ${stringLabelID}`);
       Res(stringLabelID);
     } catch (error) {
-      console.error('FAILED-TO-CREATE-LABEL');
-      Rej('');
+      console.error(`messageFromServer: Label Creation❌`);
     }
   });
 };
 
+//--> Check If Label Exists Or Not In User's Labels List
 const checkLabel = async (gmailInstance) => {
   const objectResult = await gmailInstance.users.labels.list({ userId: 'me' });
-  const arrayOfLabels = objectResult.data.labels; //--> Array Of Objects
-  let labelID = '';
+  const arrayOfLabels = objectResult.data.labels;
   for (let i in arrayOfLabels) {
-    if (arrayOfLabels[i]['name'] === 'AUTO') {
-      labelID = arrayOfLabels[i]['id'];
-      break;
+    if (arrayOfLabels[i]['name'] === 'PUSH') {
+      return arrayOfLabels[i]['id'];
     }
   }
-  if (labelID.length === 0) {
-    labelID = await createLabel(gmailInstance, 'AUTO');
-    if (labelID.length === 0) {
-      return '';
-    }
-  }
-  return labelID;
+  return '';
 };
 
+//--> Modify Labels(After Sending Email)
 const modifyLabels = async (gmailInstance, id, labelConfig) => {
   return new Promise(async (Res, Rej) => {
     try {
@@ -56,76 +51,69 @@ const modifyLabels = async (gmailInstance, id, labelConfig) => {
         id: id,
         resource: labelConfig,
       });
+      console.log('messageFromServer: Label Modification✅');
       Res('Success');
     } catch (error) {
+      console.error('messageFromServer: Label Modification❌');
       Rej('Fail');
     }
   });
 };
 
-const checkAndRespond = async (gmailInstance, id, oAuth2Client) => {
-  try {
-    const dataOfOneMail = await gmailInstance.users.messages.get({
-      userId: 'me',
-      id: id,
-    });
-    const labelsOfOneMail = dataOfOneMail.data.labelIds;
+const extractAndMessage = async (gmailInstance, oAuth2Client, myLabel) => {
+  const unreadMessages = await gmailInstance.users.messages.list({
+    userId: 'me',
+    q: 'is:unread',
+  });
 
-    const labelID = await checkLabel(gmailInstance);
-    if (labelID.length === 0) {
-      console.error('FAILED-TO-RETRIEVE-CREATE-labelID');
-    } else {
-      if (labelsOfOneMail.includes('UNREAD')) {
-        const labelConfig = {
-          addLabelIds: [labelID],
-          removeLabelIds: ['UNREAD'],
-        };
+  let arrayOfObject = unreadMessages.data.messages;
+  if (arrayOfObject === undefined) {
+    arrayOfObject = [];
+    console.log(arrayOfObject);
+    return 1;
+  }
 
-        const Status = await modifyLabels(gmailInstance, id, labelConfig);
+  for (let i in arrayOfObject) {
+    if (arrayOfObject[i]['id'] === arrayOfObject[i]['threadId']) {
+      const dataOfOneMail = await gmailInstance.users.messages.get({
+        userId: 'me',
+        id: arrayOfObject[i]['id'],
+      });
+      const Headers = dataOfOneMail.data.payload.headers;
+      let emailString = '';
+      for (let j in Headers) {
+        if (Headers[j].name === 'From') {
+          emailString = Headers[j].value;
+          break;
+        }
+      }
+      const match = emailString.match(/<([^>]+)>/);
+      if (match && match[1]) {
+        const extractedEmail = match[1];
+        console.log(`Email Received From: ${extractedEmail}`);
 
-        if (Status === 'Success') {
-          const Headers = dataOfOneMail.data.payload.headers;
-          let emailString = '';
-          for (let j in Headers) {
-            if (Headers[j].name === 'From') {
-              emailString = Headers[j].value;
-              break;
-            }
+        const sendMailResult = await SendMail(extractedEmail, oAuth2Client);
+        if (sendMailResult === 'Success') {
+          let labelID = await checkLabel(gmailInstance, myLabel);
+          if (labelID.length === 0) {
+            labelID = await createLabel(gmailInstance, myLabel);
           }
-          const match = emailString.match(/<([^>]+)>/);
-          if (match && match[1]) {
-            const extractedEmail = match[1];
-            console.log(`Sending Auto-Reply To : ${extractedEmail}`);
-            const finalMessage = await SendMail(extractedEmail, oAuth2Client);
-            if (finalMessage === 'Fail') {
-              console.error('FAILED-TO-SEND-MAIL');
-            }
-          } else {
-            console.error('FAILED-TO-EXTRACT-MAIL');
-          }
-        } else {
-          console.error('FAILED-TO-LABEL-MAIL');
+          const labelConfig = {
+            addLabelIds: [labelID],
+            removeLabelIds: ['UNREAD'],
+          };
+          const modifyLabelsResult = await modifyLabels(
+            gmailInstance,
+            arrayOfObject[i]['id'],
+            labelConfig
+          );
         }
       }
     }
-  } catch (Error) {
-    console.error('FAILED-TO-CHECK-RESPOND');
   }
-};
-
-const extractMessageID = async (gmailInstance, oAuth2Client) => {
-  //--> Object of Array/Object
-  //--> Lists The Messages In The User's Mailbox.
-  const mailBox = await gmailInstance.users.messages.list({ userId: 'me' });
-
-  //--> Array of Objects
-  const arrayOfMailID = mailBox.data.messages;
-
-  for (let i in arrayOfMailID) {
-    await checkAndRespond(gmailInstance, arrayOfMailID[i]['id'], oAuth2Client);
-  }
+  return 1;
 };
 
 module.exports = {
-  extractMessageID,
+  extractAndMessage,
 };
