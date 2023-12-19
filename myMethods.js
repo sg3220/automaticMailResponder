@@ -6,7 +6,7 @@ const createLabel = async (gmailInstance) => {
   return new Promise(async (Res, Rej) => {
     try {
       const newLabelConfiguration = {
-        name: 'PUSH',
+        name: 'BUSY',
         labelListVisibility: 'labelShow',
         messageListVisibility: 'show',
         type: 'user',
@@ -37,7 +37,7 @@ const checkLabel = async (gmailInstance) => {
   const objectResult = await gmailInstance.users.labels.list({ userId: 'me' });
   const arrayOfLabels = objectResult.data.labels;
   for (let i in arrayOfLabels) {
-    if (arrayOfLabels[i]['name'] === 'PUSH') {
+    if (arrayOfLabels[i]['name'] === 'BUSY') {
       return arrayOfLabels[i]['id'];
     }
   }
