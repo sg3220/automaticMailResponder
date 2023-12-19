@@ -25,7 +25,7 @@ const SendMail = async (recipient, oAuth2Client) => {
       });
       //--> Configuring mailOptions
       const mailOptions = {
-        from: 'Reply From 🤖 <s8418g@gmail.com>',
+        from: 'Auto-Bot 🤖 <s8418g@gmail.com>',
         to: `${recipient}`,
         subject: 'Automatic-Mail-Responder',
         text: `👋, Thanks For Mailing I'm Currently Little Busy With My Assignment...I Will Revert Back As Soon As I Get Free`,

@@ -1,6 +1,7 @@
 const { SendMail } = require('./sendMail.js');
 
 //--> Creating A New Label
+//-->GMail-API-Used: users.labels.create()
 const createLabel = async (gmailInstance) => {
   return new Promise(async (Res, Rej) => {
     try {
@@ -31,6 +32,7 @@ const createLabel = async (gmailInstance) => {
 };
 
 //--> Check If Label Exists Or Not In User's Labels List
+//-->GMail-API-Used: users.labels.list()
 const checkLabel = async (gmailInstance) => {
   const objectResult = await gmailInstance.users.labels.list({ userId: 'me' });
   const arrayOfLabels = objectResult.data.labels;
@@ -43,6 +45,7 @@ const checkLabel = async (gmailInstance) => {
 };
 
 //--> Modify Labels(After Sending Email)
+//-->GMail-API-Used: users.messages.modify()
 const modifyLabels = async (gmailInstance, id, labelConfig) => {
   return new Promise(async (Res, Rej) => {
     try {
@@ -60,6 +63,8 @@ const modifyLabels = async (gmailInstance, id, labelConfig) => {
   });
 };
 
+//-->GMail-API-Used: users.messages.list()
+//-->GMail-API-Used: users.messages.get()
 const extractAndMessage = async (gmailInstance, oAuth2Client, myLabel) => {
   const unreadMessages = await gmailInstance.users.messages.list({
     userId: 'me',
