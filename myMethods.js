@@ -133,11 +133,11 @@ const extractAndMessage = async (gmailInstance, oAuth2Client) => {
           console.log('messageFromServer: Email Sent✅');
           if (sendResult['status'] === 'Success') {
             let labelID;
-            let resultObject = await checkLabel(gmailInstance, 'ASD');
+            let resultObject = await checkLabel(gmailInstance, 'VAC');
             labelID = resultObject['labelID'];
             let resultObject02;
             if (labelID.length === 0) {
-              resultObject02 = await createLabel(gmailInstance, 'ASD');
+              resultObject02 = await createLabel(gmailInstance, 'VAC');
               labelID = resultObject02['labelID'];
             }
             const labelConfig = {
