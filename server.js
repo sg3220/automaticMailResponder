@@ -56,7 +56,7 @@ const runTask = async (gmailInstance, oAuth2Client) => {
     console.error(`❗Error, In Function: ${myError.functionName}`);
     const senderDetails = {
       senderEmail: 'siddharthghosh3220@gmail.com',
-      mailSubject: '❗  Error',
+      mailSubject: '❗ Error',
       mailText: 'Alert: Automatic-Mail-Responder-Service Crashed',
     };
     await SendMail(senderDetails, oAuth2Client);
