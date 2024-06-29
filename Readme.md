@@ -7,8 +7,7 @@ Hello, Welcome To The Documentation Of My Automatic-Mail-Responder.
 - **Language/Runtime Used:** Javascript, NodeJS
 - **Hosted On:** Render
 - **Packages Used**: googleapis(v129.0.0), nodemailer(v6.9.7)
-- **⭐ Try-Yourself**: Send An Email At **s8418g@gmail.com** & Get Automatic Reply
-- [Click To Visit Backend Server](https://automatic-mail-responder.onrender.com)
+
 
 ## GMAIL-API-Methods Used:
 
